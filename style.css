@@ -1,4 +1,4 @@
-#mine-btn{
+#mineBtn{
   background: url(./IMG-20240923-WA0000.jpg);
   background-size: 300px;
   width: 300px;
@@ -41,4 +41,9 @@ header{
 
 .level{
   
+}
+
+#energyBarMain{
+  position: absolute;
+  top: 70%;
 }
