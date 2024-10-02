@@ -82,9 +82,19 @@ header{
   left: 10%;
   height: 30%;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-@keyframes noEnergy {
+.animate{
+  animation-name: animate;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes animate {
   0% {
     opacity: 0;
     pointer-events: none;
@@ -94,7 +104,7 @@ header{
   }
   
   50% {
-    opacity: 0.5;
+    opacity: 0;
     pointer-events: auto;
     visibility: visible;
     position: absolute;
@@ -108,4 +118,43 @@ header{
     position: absolute;
     top: 0px;
   }
+}
+
+body {
+  background: #000;
+  color: #fff;
+}
+
+.userProfile {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#profilePic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+#resetBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+#resetBtn:hover {
+  background-color: #ff1a1a;
 }
