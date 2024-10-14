@@ -1627,3 +1627,8 @@ button {
     no-repeat center;
   background-size: cover;
 }
+
+
+.hidden{
+  display: none;
+}
