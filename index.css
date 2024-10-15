@@ -673,3 +673,71 @@ button {
   display: none;
 }
 
+/* Parent progress bar */
+.progressBar {
+    width: 100%;
+    height: 40px; /* Adjust height as needed */
+    background-color: #e0e0e0; /* Light background for parent */
+    border-radius: 10px;
+    position: relative; /* To position child elements absolutely */
+    overflow: hidden;
+    position: absolute;
+    z-index: 100;
+    top: 60%;
+}
+
+/* Progress rectangles */
+.progress {
+    height: 100%;
+    position: absolute;
+    background: #fff;
+    top: 0;
+    z-index: 120;
+    left: 0;
+    transition: width 0.3s ease; /* Smooth transition for filling */
+}
+
+#rectangle1 {
+    background-color: #3498db; /* Blue for rectangle1 */
+    z-index: 1; /* Displayed first */
+}
+
+#rectangle2 {
+    background-color: #e74c3c; /* Red for rectangle2 */
+    z-index: 0; /* Hidden under rectangle1 initially */
+    display: none; /* Start off hidden until level up */
+}
+
+
+.energyBarContainer {
+    width: 300px;
+    height: 50px;
+    background-color: #e0e0e0; /* Background for the energy bar */
+    position: relative;
+    overflow: hidden;
+}
+
+.energyRect {
+    height: 100%;
+    position: absolute;
+    transition: width 0.5s; /* Smooth transition for width change */
+}
+
+#energyRect1 {
+    background-color: #76c7c0; /* Color for the first rectangle */
+    width: 100%; /* Fill the container initially */
+}
+
+#energyRect2 {
+    background-color: #ffcc00; /* Color for the second rectangle */
+    width: 0%; /* Initially hidden */
+}
+
+#currentEnergyDisplay {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
+}
