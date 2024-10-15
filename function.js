@@ -10,6 +10,7 @@ const energy = document.getElementById("energyBar"); // This tracks current usab
 const tap = document.getElementById("mineBtn");
 const resetBtn = document.getElementById("claim");
 const rectangle2 = document.querySelector(".rectangle-2"); // Assuming this is your second rectangle
+const rectangleContainer = document.querySelector(".rectangle-container"); // Parent container for rectangles
 
 const stone = "stone";
 const iron = "iron";
@@ -105,7 +106,7 @@ setInterval(function () {
         energy.textContent = energyCount; // Update remaining energy
         localStorage.setItem("energy", energyCount); // Save the updated energy to localStorage
     }
-}, 500); // Refill by 1 every 5 seconds
+}, 500); // Refill by 10 every 5 seconds
 
 // Event listener for tapping (multi-touch and single-tap)
 tap.addEventListener("click", handleTap);
@@ -139,11 +140,10 @@ function handleTap() {
 }
 
 // Check and update the user's level based on their balance
-// Check balance and level up accordingly
 function checkBalance() {
     if (currentBalance < 100) return; // Skip if balance is less than 100
 
-    // Check balance and level up
+    // Check balance and level up accordingly
     if (currentBalance >= 100 && currentBalance < 1000 && lastLevel !== stone) {
         levelUp(stone, 1000, 2);  // "1K" = 1000 balance limit
     } else if (currentBalance >= 1000 && currentBalance < 10000 && lastLevel !== iron) {
@@ -171,86 +171,42 @@ function checkBalance() {
 
 // Function to handle leveling up
 function levelUp(levelName, nextLimit, newMultiplier) {
-    // Update leaderboard upon leveling up
+    // Update leaderboard with new level
     leaderboard.textContent = levelName;
-    leaderboardLimit.textContent = formatNumber(nextLimit); // Format the balance limit (e.g., "1K")
-    profitMultiplier = newMultiplier; // Set the new profit multiplier for each tap
+    leaderboardLimit.textContent = formatNumber(nextLimit); // Update leaderboard limit
+    profitMultiplier = newMultiplier; // Increase profit multiplier
 
-    // Increase max energy by 250 and reset current energy to max
-    maxEnergy += 250;
-    energyCount = maxEnergy;
-    energy.textContent = energyCount; // Update energy display
-    localStorage.setItem("energy", energyCount); // Save the updated energy
+    // Increment max energy and usable energy by 250 (only once per level-up)
+    maxEnergy += 250; // Increase max energy by 250
+    energyCount = maxEnergy; // Refilling usable energy to new max
 
-    // Reset the fill of rectangle-2 (progress) to 0%
-    rectangle2.style.width = "0%";
+    // Update energy and energy bar displays
+    energy.textContent = energyCount; // Update the displayed usable energy
+    energyBar.textContent = maxEnergy; // Update the maximum energy display
 
-    // Save the level and limit to localStorage for persistence
+    // Save new level and limits to localStorage
     localStorage.setItem("level", levelName);
     localStorage.setItem("maxBalance", nextLimit);
     localStorage.setItem("multiplier", newMultiplier);
+    localStorage.setItem("maxEnergy", maxEnergy); // Save updated max energy
 
-    // Store the current level
-    lastLevel = levelName;
-
-    // Show overlay message only once for each level
-    overlay.classList.remove("hidden");
-    overlayWhite.classList.remove("hidden");
+    console.log(`Level up! New level: ${levelName}, Max balance: ${nextLimit}, Multiplier: ${newMultiplier}`);
 }
 
-// Function to update rectangle-2 filling based on balance and leaderboard limit
-function updateRectangleFill() {
-    const limit = parseInt(leaderboardLimit.textContent.replace(/[^0-9]/g, '')); // Parse current limit
-    const fillPercentage = Math.min((currentBalance / limit) * 100, 100); // Calculate fill percentage
-    rectangle2.style.width = fillPercentage + "%"; // Update the width of rectangle-2
-}
-
-// Format numbers for the leaderboard limit display (e.g., 1K, 10K, etc.)
+// Function to format numbers (e.g., 1000 to 1K)
 function formatNumber(num) {
-    if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1) + "B"; // Billions
-    } else if (num >= 1000000) {
-        return (num / 1000000).toFixed(1) + "M"; // Millions
-    } else if (num >= 1000) {
-        return (num / 1000).toFixed(1) + "K"; // Thousands
-    } else {
-        return num;
-    }
+    if (num >= 1e12) return (num / 1e12).toFixed(1) + "T"; // Trillions
+    if (num >= 1e9) return (num / 1e9).toFixed(1) + "B"; // Billions
+    if (num >= 1e6) return (num / 1e6).toFixed(1) + "M"; // Millions
+    if (num >= 1e3) return (num / 1e3).toFixed(1) + "K"; // Thousands
+    return num;
 }
 
-// Hide the overlay and "no energy" when clicked
-overlay.addEventListener("click", function () {
-    overlay.classList.add("hidden");
-    overlayWhite.classList.add("hidden");
-});
-
-overlayWhite.addEventListener("click", function () {
-    overlay.classList.add("hidden");
-    overlayWhite.classList.add("hidden");
-    noEnergy.classList.add("hidden");
-});
-
-// Function to update rectangle-2 filling based on balance and leaderboard limit
-/*
-
-
-// Initial call to set rectangle fill based on the starting values
-*/
-
-
-
-
-if (rectangle2.style.width >= 0) {
-  function updateRectangleFill() {
-    const limit = parseInt(leaderboardLimit.textContent); // Get current leaderboard limit
-    const fillPercentage = Math.min((currentBalance / limit) * 100, 100); // Calculate fill percentage
-    rectangle2.style.width = fillPercentage + "%"; // Update the width of rectangle-2
+// Function to update the filling of rectangle-2
+function updateRectangleFill() {
+    // Logic for updating rectangle-2 filling based on current balance
+    const fillPercentage = Math.min((currentBalance / parseInt(leaderboardLimit.textContent)) * 100, 100); // Calculate fill percentage
+    rectangle2.style.width = `${fillPercentage}%`; // Update the fill of rectangle-2
 }
-  updateRectangleFill();
-}
-else if (rectangle2.style.width >= 100) {
-  function emptyRectangle2() {
-  rectangle2.style.width = "0px"
-}
-emptyRectangle2();
-}
+
+// Add any additional logic or event listeners as needed
