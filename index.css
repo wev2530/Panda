@@ -10,6 +10,16 @@
   padding: 0;
 }
 
+.trophy{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #f00;
+  position: absolute;
+  top: 0;
+  
+}
+
 .main-container {
   overflow: hidden;
 }
@@ -299,10 +309,10 @@ button {
 }
 .img-3 {
   position: absolute;
-  width: 249px;
-  height: 249px;
+  width: 250px;
+  height: 250px;
   top: 0;
-  left: 28vw;
+  left: 30vw;
   transform: translate(-50%, 0);
   z-index: 18;
   border-radius: 50%;
@@ -310,10 +320,12 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #0000;
+  border: none;
 }
 
 .img-3 img{
-  width: 125%;
+  width: 155%;
   border-radius: 50%;
 }
 
@@ -536,12 +548,12 @@ button {
   position: relative;
   width: 32px;
   height: 32px;
-  background: url(./Home/assets/images/f077ae8b-0759-4056-a0c8-745afb0d24b6.png)
-    no-repeat center;
+  background: url(/_40d36eb3-2634-4908-879b-22090de5926e-removebg-preview.png)
+    no-repeat center #f00;
   background-size: cover;
-  z-index: 37;
+  z-index: 20;
   border-radius: 50%;
-  left: -20px;
+  left: -22px;
 }
 .flex-row-bb {
   display: flex;
@@ -740,4 +752,41 @@ button {
 
 .hidden {
     display: none;
+}
+
+.rectangle-8{
+  width: 100%;
+  padding: 0;
+  /* margin: 0; */
+}
+
+.frame-9{
+  width: 100%;
+}
+
+.mineEl{
+  width: 50px;
+  position: relative;
+  left: -30px;
+}
+
+.fren{
+  width: 50px;
+  
+  position: relative;
+  left: -50px;
+}
+
+.taskEl{
+  width: 50px;
+  height: 50px;
+  position: relative;
+  left: -70px;
+}
+
+.aDrop{
+  width: 50px;
+  height: 5px;
+  position: relative;
+  left: -90px;
 }
