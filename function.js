@@ -9,7 +9,7 @@ const energyBar = document.getElementById("energyBarMain1"); // This shows max e
 const energy = document.getElementById("energyBar"); // This tracks current usable energy
 const tap = document.getElementById("mineBtn");
 const resetBtn = document.getElementById("claim");
-const rectangle2 = document.querySelector(".rectangle-2"); // Assuming this is your second rectangle
+// const rectangle2 = document.querySelector(".rectangle-2")// Assuming this is your second rectangle
 const rectangleContainer = document.querySelector(".rectangle-container"); // Parent container for rectangles
 
 const stone = "stone";
@@ -19,10 +19,10 @@ const silver = "silver";
 const gold = "gold";
 const diamond = "diamond";
 const platinum = "platinum";
-const master = "master";
-const grandMaster = "grand master";
-const lord = "lord";
-const creator = "creator";
+const god = "god";
+// const grandMaster = " master";
+// const lord = "lord";
+// const creator = "creator";
 
 // Initialize variables
 leaderboardLimit.textContent = 100;
@@ -93,7 +93,7 @@ function resetGame() {
     energyBar.textContent = maxEnergy; // Reset energy bar display
 
     // Reset rectangle fill
-    rectangle2.style.width = "0%"; // Reset rectangle-2 fill
+    // rectangle2.style.width = "0%"; // Reset rectangle-2 fill
 }
 
 // Add event listener for reset button
@@ -159,7 +159,7 @@ function checkBalance() {
     } else if (currentBalance >= 10000000 && currentBalance < 50000000 && lastLevel !== platinum) {
         levelUp(platinum, 50000000, 100); // "50M" = 50000000 balance limit
     } else if (currentBalance >= 50000000 && currentBalance < 100000000 && lastLevel !== master) {
-        levelUp(master, 100000000, 200); // "100M" = 100000000 balance limit
+        levelUp(god, "50B", 200); // "100M" = 100000000 balance limit
     } else if (currentBalance >= 100000000 && currentBalance < 1000000000 && lastLevel !== grandMaster) {
         levelUp(grandMaster, 1000000000, 500); // "1B" = 1000000000 balance limit
     } else if (currentBalance >= 1000000000 && currentBalance < 20000000000 && lastLevel !== lord) {
