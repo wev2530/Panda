@@ -9,6 +9,7 @@ const energyBar = document.getElementById("energyBarMain1"); // This shows max e
 const energy = document.getElementById("energyBar"); // This tracks current usable energy
 const tap = document.getElementById("mineBtn");
 const resetBtn = document.getElementById("claim");
+const levelImg = document.getElementById("levelImg")
 // const rectangle2 = document.querySelector(".rectangle-2")// Assuming this is your second rectangle
 const rectangleContainer = document.querySelector(".rectangle-container"); // Parent container for rectangles
 
@@ -84,12 +85,12 @@ function resetGame() {
     // Reset all displayed values
     currentBalance = 0;
     balance.textContent = currentBalance;
-    energyCount = 500; // Reset energy count to initial value
+    energyCount = 50; // Reset energy count to initial value
     energy.textContent = energyCount; // Update energy display
-    leaderboard.textContent = "Wood"; // Reset to starting level
+    leaderboard.textContent = "wood"; // Reset to starting level
     leaderboardLimit.textContent = 100; // Reset leaderboard limit
     profitMultiplier = 1; // Reset profit multiplier
-    maxEnergy = 500; // Reset max energy
+    maxEnergy = 50; // Reset max energy
     energyBar.textContent = maxEnergy; // Reset energy bar display
 
     // Reset rectangle fill
@@ -102,11 +103,11 @@ resetBtn.addEventListener("click", resetGame);
 // Refill energy by +1 every 5 seconds, but not beyond the maxEnergy
 setInterval(function () {
     if (energyCount < maxEnergy) {
-        energyCount += 10;
+        energyCount += 1;
         energy.textContent = energyCount; // Update remaining energy
         localStorage.setItem("energy", energyCount); // Save the updated energy to localStorage
     }
-}, 500); // Refill by 10 every 5 seconds
+}, 1000); // Refill by 10 every 5 seconds
 
 // Event listener for tapping (multi-touch and single-tap)
 tap.addEventListener("click", handleTap);
@@ -145,39 +146,41 @@ function checkBalance() {
 
     // Check balance and level up accordingly
     if (currentBalance >= 100 && currentBalance < 1000 && lastLevel !== stone) {
-        levelUp(stone, 1000, 2);  // "1K" = 1000 balance limit
-    } else if (currentBalance >= 1000 && currentBalance < 10000 && lastLevel !== iron) {
-        levelUp(iron, 10000, 3);  // "10K" = 10000 balance limit
+        levelUp(stone, "10.0K", 2);  // "1K" = 1000 balance limit
+    } else if (currentBalance >= 10000 && currentBalance < 100000 && lastLevel !== iron) {
+        levelUp(iron, "100.0K", 3);
+        leaderboard.textContent= "Iron"
+          // "10K" = 10000 balance limit
     } else if (currentBalance >= 10000 && currentBalance < 100000 && lastLevel !== bronze) {
-        levelUp(bronze, 100000, 5); // "100K" = 100000 balance limit
+        levelUp(bronze, "1.0M", 5); // "100K" = 100000 balance limit
     } else if (currentBalance >= 100000 && currentBalance < 1000000 && lastLevel !== silver) {
-        levelUp(silver, 1000000, 10); // "1M" = 1000000 balance limit
+        levelUp(silver, "50.0M", 10); // "1M" = 1000000 balance limit
     } else if (currentBalance >= 1000000 && currentBalance < 5000000 && lastLevel !== gold) {
-        levelUp(gold, 5000000, 20);  // "5M" = 5000000 balance limit
+        levelUp(gold, "100.0M", 20);  // "5M" = 5000000 balance limit
     } else if (currentBalance >= 5000000 && currentBalance < 10000000 && lastLevel !== diamond) {
-        levelUp(diamond, 10000000, 50);  // "10M" = 10000000 balance limit
+        levelUp(diamond, "1.0B", 50);  // "10M" = 10000000 balance limit
     } else if (currentBalance >= 10000000 && currentBalance < 50000000 && lastLevel !== platinum) {
-        levelUp(platinum, 50000000, 100); // "50M" = 50000000 balance limit
+        levelUp(platinum, "10.0B", 100); // "50M" = 50000000 balance limit
     } else if (currentBalance >= 50000000 && currentBalance < 100000000 && lastLevel !== master) {
         levelUp(god, "50B", 200); // "100M" = 100000000 balance limit
-    } else if (currentBalance >= 100000000 && currentBalance < 1000000000 && lastLevel !== grandMaster) {
-        levelUp(grandMaster, 1000000000, 500); // "1B" = 1000000000 balance limit
-    } else if (currentBalance >= 1000000000 && currentBalance < 20000000000 && lastLevel !== lord) {
-        levelUp(lord, 20000000000, 1000); // "20B" = 20000000000 balance limit
-    } else if (currentBalance >= 20000000000 && lastLevel !== creator) {
-        levelUp(creator, Number.MAX_SAFE_INTEGER, 5000); // No further limit beyond creator
+//     } else if (currentBalance >= 100000000 && currentBalance < 1000000000 && lastLevel !== grandMaster) {
+//         levelUp(grandMaster, 1000000000, 500); // "1B" = 1000000000 balance limit
+//     } else if (currentBalance >= 1000000000 && currentBalance < 20000000000 && lastLevel !== lord) {
+//         levelUp(lord, 20000000000, 1000); // "20B" = 20000000000 balance limit
+//     } else if (currentBalance >= 20000000000 && lastLevel !== creator) {
+//         levelUp(creator, Number.MAX_SAFE_INTEGER, 5000); // No further limit beyond creator
+//     }
+// }
     }
-}
-
 // Function to handle leveling up
 function levelUp(levelName, nextLimit, newMultiplier) {
     // Update leaderboard with new level
     leaderboard.textContent = levelName;
-    leaderboardLimit.textContent = formatNumber(nextLimit); // Update leaderboard limit
+    leaderboardLimit.textContent = nextLimit; // Update leaderboard limit
     profitMultiplier = newMultiplier; // Increase profit multiplier
 
     // Increment max energy and usable energy by 250 (only once per level-up)
-    maxEnergy += 250; // Increase max energy by 250
+    // maxEnergy += 250; // Increase max energy by 250
     energyCount = maxEnergy; // Refilling usable energy to new max
 
     // Update energy and energy bar displays
@@ -194,19 +197,18 @@ function levelUp(levelName, nextLimit, newMultiplier) {
 }
 
 // Function to format numbers (e.g., 1000 to 1K)
-function formatNumber(num) {
-    if (num >= 1e12) return (num / 1e12).toFixed(1) + "T"; // Trillions
-    if (num >= 1e9) return (num / 1e9).toFixed(1) + "B"; // Billions
-    if (num >= 1e6) return (num / 1e6).toFixed(1) + "M"; // Millions
-    if (num >= 1e3) return (num / 1e3).toFixed(1) + "K"; // Thousands
-    return num;
-}
+// function formatNumber(num) {
+//     if (num >= 1e12) return (num / 1e12).toFixed(1) + "T"; // Trillions
+//     if (num >= 1e9) return (num / 1e9).toFixed(1) + "B"; // Billions
+//     if (num >= 1e6) return (num / 1e6).toFixed(1) + "M"; // Millions
+//     if (num >= 1e3) return (num / 1e3).toFixed(1) + "K"; // Thousands
+//     return num;
+// }
 
-// Function to update the filling of rectangle-2
-function updateRectangleFill() {
-    // Logic for updating rectangle-2 filling based on current balance
-    const fillPercentage = Math.min((currentBalance / parseInt(leaderboardLimit.textContent)) * 100, 100); // Calculate fill percentage
-    rectangle2.style.width = `${fillPercentage}%`; // Update the fill of rectangle-2
+// // Function to update the filling of rectangle-2
+// function updateRectangleFill() {
+//     // Logic for updating rectangle-2 filling based on current balance
+//     const fillPercentage = Math.min((currentBalance / parseInt(leaderboardLimit.textContent)) * 100, 100); // Calculate fill percentage
+//     rectangle2.style.width = `${fillPercentage}%`; // Update the fill of rectangle-2
+// }
 }
-
-// Add any additional logic or event listeners as needed
