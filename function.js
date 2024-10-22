@@ -1,4 +1,5 @@
 const leaderboard = document.getElementById("level");
+const pph = document.getElementById("pph")
 const overlayWhite = document.querySelector(".overlay2");
 const noEnergy = document.querySelector(".noEnergy");
 const overlay = document.querySelector(".overlay");
@@ -9,6 +10,7 @@ const energyBar = document.getElementById("energyBarMain1"); // This shows max e
 const energy = document.getElementById("energyBar"); // This tracks current usable energy
 const tap = document.getElementById("mineBtn");
 const resetBtn = document.getElementById("claim");
+const pphTxt = document.getElementById("pphTxt")
 const levelImg = document.getElementById("levelImg")
 // const rectangle2 = document.querySelector(".rectangle-2")// Assuming this is your second rectangle
 const rectangleContainer = document.querySelector(".rectangle-container"); // Parent container for rectangles
@@ -27,8 +29,8 @@ const god = "god";
 
 // Initialize variables
 leaderboardLimit.textContent = 100;
-let energyCount = 500; // Set initial usable energy to max energy
-let maxEnergy = 500; // Maximum energy that refills on level up
+let energyCount = 50; // Set initial usable energy to max energy
+let maxEnergy = 50; // Maximum energy that refills on level up
 let profitMultiplier = 1; // Profit multiplier for each tap
 let lastLevel = ""; // Store the last level the user was at
 let currentBalance = 0; // Track current balance
@@ -42,63 +44,8 @@ if (storedBalance) {
     balance.textContent = 0;
 }
 
-// Load energy from localStorage if it exists
-let storedEnergy = localStorage.getItem("energy");
-if (storedEnergy) {
-    energyCount = parseInt(storedEnergy);
-    energy.textContent = energyCount; // This will track the remaining usable energy
-} else {
-    energy.textContent = energyCount;
-}
-
-// Load leaderboard level from localStorage if it exists
-let storedLevel = localStorage.getItem("level");
-if (storedLevel) {
-    leaderboard.textContent = storedLevel;
-    lastLevel = storedLevel; // Set the last level to the stored value
-}
-
-// Load leaderboard limit from localStorage if it exists
-let storedLimit = localStorage.getItem("maxBalance");
-if (storedLimit) {
-    leaderboardLimit.textContent = storedLimit;
-}
-
-// Load profit multiplier from localStorage if it exists
-let storedMultiplier = localStorage.getItem("multiplier");
-if (storedMultiplier) {
-    profitMultiplier = parseInt(storedMultiplier);
-}
-
 // Always display the maximum energy in the energy bar
 energyBar.textContent = maxEnergy; // Show max energy in energy bar
-
-// Reset game function
-function resetGame() {
-    // Reset localStorage values
-    localStorage.removeItem("balance");
-    localStorage.removeItem("energy");
-    localStorage.removeItem("level");
-    localStorage.removeItem("maxBalance");
-    localStorage.removeItem("multiplier");
-
-    // Reset all displayed values
-    currentBalance = 0;
-    balance.textContent = currentBalance;
-    energyCount = 50; // Reset energy count to initial value
-    energy.textContent = energyCount; // Update energy display
-    leaderboard.textContent = "wood"; // Reset to starting level
-    leaderboardLimit.textContent = 100; // Reset leaderboard limit
-    profitMultiplier = 1; // Reset profit multiplier
-    maxEnergy = 50; // Reset max energy
-    energyBar.textContent = maxEnergy; // Reset energy bar display
-
-    // Reset rectangle fill
-    // rectangle2.style.width = "0%"; // Reset rectangle-2 fill
-}
-
-// Add event listener for reset button
-resetBtn.addEventListener("click", resetGame);
 
 // Refill energy by +1 every 5 seconds, but not beyond the maxEnergy
 setInterval(function () {
@@ -142,10 +89,10 @@ function handleTap() {
 
 // Check and update the user's level based on their balance
 function checkBalance() {
-    if (currentBalance < 100) return; // Skip if balance is less than 100
+    if (currentBalance < 1000) return; // Skip if balance is less than 100
 
     // Check balance and level up accordingly
-    if (currentBalance >= 100 && currentBalance < 1000 && lastLevel !== stone) {
+    if (currentBalance >= 1000 && currentBalance < 10000 && lastLevel !== stone) {
         levelUp(stone, "10.0K", 2);  // "1K" = 1000 balance limit
     } else if (currentBalance >= 10000 && currentBalance < 100000 && lastLevel !== iron) {
         levelUp(iron, "100.0K", 3);
@@ -212,3 +159,19 @@ function levelUp(levelName, nextLimit, newMultiplier) {
 //     rectangle2.style.width = `${fillPercentage}%`; // Update the fill of rectangle-2
 // }
 }
+
+function hideNoENergy() {
+    noEnergy.classList.add("hidden");
+    overlayWhite.classList.add("hidden")
+}
+
+function hidePph() {
+    pph.classList.add("hidden")
+}
+function showPph() {
+    pph.classList.remove("hidden")
+}
+
+pph.addEventListener("click", hidePph)
+noEnergy.addEventListener("click", hideNoENergy);
+pphTxt.addEventListener("click", showPph)

@@ -8,8 +8,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" />
     <link id="stylesheet" rel="stylesheet" href="index.css" />
   </head>
-  <body>
-
+  <body class="">
+    <div id="friends" class="frendsPg"><iframe src="./Frens/fren.html" frameborder="0"></iframe></div>
+    <div id="boosts" class="boostPg"><iframe src="boosts/index.html" frameborder="0"></iframe></div>
+    <div id="tasks" class="tasksPg"><iframe src="Tasks/tasks.html" frameborder="0"></iframe></div>
+    <img id="pph" class="hidden" src="./PPH.png" alt="">
     <div class="overlay hidden">
       LEVEL UP 
     </div>
@@ -27,7 +30,7 @@
             <div class="polygon"></div>
             <span class="ceo">( CEO )</span><span class="henry">Henry</span>
           </div>
-          <div id="levelHolder"><span id="level" class="bronze">wood</span><img id="levelImg" src="./gods.png" alt=""><span id="maxBalance" class=" slash">1/7</span></div>
+          <div id="levelHolder"><span id="level" class="levelHolder bronze">wood</span><img id="levelImg" class="levelHolder" src="./gods.png" alt=""><span id="maxBalance" class="levelHolder slash">1/7</span></div>
           <div class=""></div>
           <div class="arrow"></div>
           
@@ -35,7 +38,7 @@
         <div class="flex-row">
           <div class="d-b-3"></div>
           <span class="cards">Cards</span
-          ><span class="profit-o-hr">profit :o/hr</span
+          ><span id="pphTxt" class="profit-o-hr">profit :o/hr</span
           >
         </div>
         <span id="balance" class="o">0</span>
@@ -52,7 +55,7 @@
           <div class="rectangle-6">
             <span class="fifty-fifty"><span id="energyBar">50</span>/ <span id="energyBarMain1">50</span></span
             ><span class="energy">Energy</span>
-            <button id="claim" class="claim">claim</button>
+            <!-- <button id="claim" class="claim">claim</button> -->
           </div>
         </div>
         <div class="rectangle-7"><span class="boost">BOOST</span></div>
