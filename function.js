@@ -175,3 +175,8 @@ function showPph() {
 pph.addEventListener("click", hidePph)
 noEnergy.addEventListener("click", hideNoENergy);
 pphTxt.addEventListener("click", showPph)
+
+let leaderboardAll;
+let leaderboardLimitAll;
+
+leaderboardAll = leaderboard;
