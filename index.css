@@ -1,5 +1,6 @@
 body{
     overflow: hidden;
+    background: #000;
 }
 
 main{
@@ -146,4 +147,39 @@ footer{
 
 *{
     color: #fff;
+}
+
+iframe{
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    position: absolute;
+    /* top: 90px; */
+}
+
+.iframe{
+    /* display: none; */
+    visibility: hidden;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.8s ease-in-out;
+}
+
+.frenPg .iframe{
+    visibility: visible;
+    pointer-events: all;
+    opacity: 1;
+}
+
+.footer1{
+    width: auto;
+    max-width: 449px;
+    height: 80px;
+    background: purple;
+    margin: 0 auto;
+    position: relative;
+    z-index: 50;
+    top: 75vh;
+    left: 0;
+    display: flex;
 }
