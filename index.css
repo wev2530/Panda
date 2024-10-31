@@ -1,3 +1,7 @@
+*{
+  margin: 0;
+  padding: 0;
+}
 body{
     overflow: hidden;
     background: #000;
@@ -53,7 +57,7 @@ header{
 }
 
 .tapCoin{
-    width: 50%;
+    width: 75%;
     overflow: hidden;
     height: 40%;
     margin: 70px auto;
@@ -182,4 +186,35 @@ iframe{
     top: 75vh;
     left: 0;
     display: flex;
+}
+
+.channels img{
+  width: 25px;
+  height: 50x;
+  background: #fff;
+  border-radius: 50%;
+}
+
+ion-icon{
+  width: 25px;
+  height: 25px;
+  color: #f00;
+}
+
+
+.none{
+  display: none;
+}
+
+h2, 
+p{
+  text-align: center;
+}
+
+.channels{
+  margin: 0 auto;
+  width: 50%;
+  height: fit-content;
+  display: flex;
+  justify-content: space-around;
 }
