@@ -9,3 +9,4 @@ frenPg.addEventListener("click", function(){
     firstFooter.classList.add("none")
     boostBtn.classList.add("none")
 })
+
