@@ -1,3 +1,5 @@
+alert("This game is still under construction press OK to enter")
+
 const frenPg = document.querySelector(".frenEl");
 const body = document.querySelector("body");
 const firstFooter = document.querySelector(".footer0")
