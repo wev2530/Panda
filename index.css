@@ -169,10 +169,25 @@ iframe{
     transition: all 0.8s ease-in-out;
 }
 
-.frenPg .iframe{
-    visibility: visible;
-    pointer-events: all;
-    opacity: 1;
+.frenPg .iframe1 {
+  visibility: visible;
+  pointer-events: all;
+  opacity: 1;
+}
+.frenPg .iframe2 {
+  visibility: visible;
+  pointer-events: all;
+  opacity: 1;
+}
+.frenPg .iframe3 {
+  visibility: visible;
+  pointer-events: all;
+  opacity: 1;
+}
+.frenPg .iframe4 {
+  visibility: visible;
+  pointer-events: all;
+  opacity: 1;
 }
 
 .footer1{
@@ -217,4 +232,11 @@ p{
   height: fit-content;
   display: flex;
   justify-content: space-around;
+}
+
+#loadingImage{
+  width: 100vw;
+  height: 100vh;
+  /* background: #000; */
+  overflow-x: hidden;
 }
