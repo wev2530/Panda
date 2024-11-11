@@ -27,7 +27,7 @@ frenPg.addEventListener("click", function(){
 
 
 adropg.addEventListener("click", function(){
-    body.classList.add("frenPg");
+    body.classList.add("adropPg");
     console.log("ha ha fren was clicked");
     firstFooter.classList.add("none")
     boostBtn.classList.add("none")
